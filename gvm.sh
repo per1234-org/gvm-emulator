@@ -13,6 +13,7 @@ if [[ "$verb" == "help" ]]; then
   echo "Example: gvm use go1.17"
   echo "Verbs:"
   echo "- install: Install the specified Go version."
+  echo "- list: List all installed Go versions."
   echo "- use: Use the specified Go version."
   echo "- help: Display help."
 elif [[ "$verb" == "install" ]]; then
@@ -23,6 +24,17 @@ elif [[ "$verb" == "install" ]]; then
 
   go install "golang.org/dl/${argument}@latest"
   ${argument} download
+elif [[ "$verb" == "list" ]]; then
+  find \
+    "${GOPATH}/bin" \
+    -maxdepth 1 \
+    -executable \
+    -regex ".*/go[0-9]+\.[0-9]+.*" \
+    -regextype posix-extended \
+    -type f \
+    -execdir \
+    basename --suffix=".exe" '{}' \
+    \;
 elif [[ "$verb" == "use" ]]; then
   if [[ "$argument" == "" ]]; then
     echo "error: Go version not provided."
