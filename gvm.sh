@@ -8,11 +8,6 @@ if [[ "$verb" == "" ]]; then
   exit 1
 fi
 
-if [[ "$verb" != "help" && "$argument" == "" ]]; then
-  echo "error: Go version not provided."
-  exit 1
-fi
-
 if [[ "$verb" == "help" ]]; then
   echo "Usage: gvm <verb> [Go version]"
   echo "Example: gvm use go1.17"
@@ -21,9 +16,19 @@ if [[ "$verb" == "help" ]]; then
   echo "- use: Use the specified Go version."
   echo "- help: Display help."
 elif [[ "$verb" == "install" ]]; then
+  if [[ "$argument" == "" ]]; then
+    echo "error: Go version not provided."
+    exit 1
+  fi
+
   go install golang.org/dl/${argument}@latest
   ${argument} download
 elif [[ "$verb" == "use" ]]; then
+  if [[ "$argument" == "" ]]; then
+    echo "error: Go version not provided."
+    exit 1
+  fi
+
   export GOROOT="$(${argument} env GOROOT)"
   # The path must be converted to POSIX format before being added to the PATH environment variable.
   posix_goroot="$(cygpath "${GOROOT}")"
