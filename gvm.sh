@@ -29,10 +29,12 @@ elif [[ "$verb" == "use" ]]; then
     exit 1
   fi
 
-  export GOROOT="$(${argument} env GOROOT)"
+  GOROOT="$(${argument} env GOROOT)"
+  export GOROOT
   # The path must be converted to POSIX format before being added to the PATH environment variable.
   posix_goroot="$(cygpath "${GOROOT}")"
-  export PATH="${posix_goroot}/bin:${PATH}"
+  PATH="${posix_goroot}/bin:${PATH}"
+  export PATH
 else
   echo "error: Verb $verb unknown."
   exit 1
