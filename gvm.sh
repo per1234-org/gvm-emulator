@@ -21,7 +21,7 @@ elif [[ "$verb" == "install" ]]; then
     exit 1
   fi
 
-  go install golang.org/dl/${argument}@latest
+  go install "golang.org/dl/${argument}@latest"
   ${argument} download
 elif [[ "$verb" == "use" ]]; then
   if [[ "$argument" == "" ]]; then
