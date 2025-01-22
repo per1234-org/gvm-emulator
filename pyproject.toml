@@ -10,7 +10,7 @@ packages = [{include = "gvm_emulator"}]
 python = "^3.9"
 
 [tool.poetry.group.dev.dependencies]
-codespell = "^2.3.0"
+codespell = "^2.4.0"
 
 [build-system]
 requires = ["poetry-core"]
