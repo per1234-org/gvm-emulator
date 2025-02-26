@@ -41,7 +41,7 @@ elif [[ "$verb" == "use" ]]; then
     exit 1
   fi
 
-  GOROOT="$(${argument} env GOROOT)"
+  GOROOT="$(GOTOOLCHAIN="${argument}" ${argument} env GOROOT)"
   export GOROOT
   # The path must be converted to POSIX format before being added to the PATH environment variable.
   posix_goroot="$(cygpath "${GOROOT}")"
