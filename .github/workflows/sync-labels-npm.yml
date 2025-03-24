@@ -22,8 +22,8 @@ on:
       - "package.json"
       - "package-lock.json"
   schedule:
-    # Run daily at 8 AM UTC to sync with changes to shared label configurations.
-    - cron: "0 8 * * *"
+    # Run periodically to sync with changes to shared label configurations.
+    - cron: "0 8 * * FRI"
   workflow_dispatch:
   repository_dispatch:
 
